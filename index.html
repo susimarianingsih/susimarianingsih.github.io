@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Nilai Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .result-container {
+            max-width: 300px;
+            margin: auto;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Input Nomor Identitas Mahasiswa</h2>
+    <form id="nilaiForm">
+        <label for="nim">Nomor Identitas:</label><br>
+        <input type="text" id="nim" name="nim" required><br><br>
+        <input type="button" value="Tampilkan Nilai" onclick="tampilkanNilai()">
+    </form>
+</div>
+
+<div id="result" class="result-container" style="display:none;">
+    <h3>Pengumuman Nilai</h3>
+    <p id="announcement"></p>
+</div>
+
+<script>
+    // Data nilai mahasiswa berdasarkan nomor identitas
+    var dataNilai = {
+        "202101": { nama: "Andi", nilai: 75 },
+        "202102": { nama: "Budi", nilai: 55 },
+        "202103": { nama: "Citra", nilai: 90 },
+        "202104": { nama: "Dewi", nilai: 45 },
+        "202105": { nama: "Eka", nilai: 65 }
+    };
+
+    function tampilkanNilai() {
+        var nim = document.getElementById('nim').value;
+        var announcement = '';
+
+        if (dataNilai[nim]) {
+            var nama = dataNilai[nim].nama;
+            var nilai = dataNilai[nim].nilai;
+
+            if (nilai >= 60) {
+                announcement = 'Selamat ' + nama + ' (' + nim + '), Anda Lulus dengan nilai ' + nilai + '!';
+            } else {
+                announcement = 'Maaf ' + nama + ' (' + nim + '), Anda Tidak Lulus. Nilai Anda: ' + nilai + '.';
+            }
+        } else {
+            announcement = 'Nomor Identitas ' + nim + ' tidak ditemukan.';
+        }
+
+        document.getElementById('announcement').innerText = announcement;
+        document.getElementById('result').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
